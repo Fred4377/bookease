@@ -1,0 +1,162 @@
+/* Google Fonts - switched to Inter for body and Syne for headings, looks way cleaner */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;600;700;800&display=swap');
+
+:root {
+  /* BookEase Brand Colors - Deep violet vibe */
+  --bookease-primary: #7c3aed;
+  --bookease-primary-hover: #6d28d9;
+  --bookease-accent: #f43f5e;
+  
+  --dark-bg: #0f172a;
+  --card-bg: #1e293b;
+  --border-subtle: rgba(230, 237, 243, 0.08);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  background-color: var(--dark-bg);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bookease-primary);
+}
+
+/* Custom DatePicker Styling for BookEase */
+.bookease-datepicker {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important; /* 12px is slightly softer than 1rem */
+  font-family: 'Inter', sans-serif !important;
+  color: var(--text-main) !important;
+  padding: 0.6rem !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.bookease-datepicker .react-datepicker__header {
+  background-color: var(--dark-bg) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  border-top-left-radius: 11px !important;
+  border-top-right-radius: 11px !important;
+}
+
+.bookease-datepicker .react-datepicker__current-month,
+.bookease-datepicker .react-datepicker__day-name,
+.bookease-datepicker .react-datepicker__day {
+  color: var(--text-main) !important;
+}
+
+.bookease-datepicker .react-datepicker__day:hover {
+  background-color: var(--bookease-primary) !important;
+  color: white !important;
+  border-radius: 6px !important;
+  transform: scale(1.1); /* micro-interaction */
+  transition: all 0.2s ease;
+}
+
+.bookease-datepicker .react-datepicker__day--selected {
+  background-color: var(--bookease-primary) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+
+.bookease-datepicker .react-datepicker__day--disabled {
+  color: rgba(255, 255, 255, 0.1) !important;
+  text-decoration: line-through;
+}
+
+.bookease-datepicker .react-datepicker__day--disabled:hover {
+  background-color: transparent !important;
+  transform: none;
+}
+
+.bookease-datepicker .react-datepicker__day--today {
+  border: 2px solid var(--bookease-accent) !important;
+  border-radius: 6px !important;
+  font-weight: bold;
+}
+
+/* Success Checkmark CSS Animation */
+.checkmark-circle {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 50%;
+  border: 4px solid var(--bookease-primary);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.2);
+  animation: fill-purple 0.45s ease-in-out forwards;
+}
+
+.checkmark-stem {
+  width: 4px;
+  height: 25px;
+  background-color: var(--bookease-primary);
+  position: absolute;
+  left: 40px;
+  top: 18px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.checkmark-kick {
+  width: 15px;
+  height: 4px;
+  background-color: var(--bookease-primary);
+  position: absolute;
+  left: 28px;
+  top: 38px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+@keyframes fill-purple {
+  0% { box-shadow: inset 0px 0px 0px var(--bookease-primary); }
+  100% { box-shadow: inset 0px 0px 0px 40px rgba(124, 58, 237, 0.15); }
+}
+
+/* Entrance Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bounce Animation */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3.5s infinite ease-in-out;
+}
