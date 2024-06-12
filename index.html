@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookEase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        :root { --bg: #0f172a; --text: #f8fafc; --accent: #3b82f6; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; line-height: 1.6; }
+        * { box-sizing: border-box; }
+        
+        /* Alternating Colors */
+        section:nth-of-type(even) { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.3); }
+        section:nth-of-type(odd) { background: var(--bg); }
+        
+        section { padding: 100px 20px; text-align: center; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
+        p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; color: #94a3b8; }
+        .btn { display: inline-block; padding: 15px 30px; background: var(--accent); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-3px); }
+        
+        .grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+        .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); width: 300px; }
+        .card h3 { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>BookEase</h1>
+        <p>Effortless Booking, Anytime, Anywhere</p>
+        <a href="https://github.com/Fred4377/bookease" class="btn">View on GitHub</a>
+    </section>
+    <section>
+        <h2>Features</h2>
+        <div class="grid">
+            <div class="card"><h3>Real-time Availability</h3><p>Experience seamless functionality.</p></div>
+            <div class="card"><h3>Smart Scheduling</h3><p>Experience seamless functionality.</p></div>
+            <div class="card"><h3>Instant Confirmation</h3><p>Experience seamless functionality.</p></div>
+        </div>
+    </section>
+    <section>
+        <h2>Tech Stack</h2>
+        <p>Built with React, Node.js, and modern web technologies.</p>
+    </section>
+    <section>
+        <p>&copy; 2026 Fred Otieno. Built with ❤️</p>
+    </section>
+</body>
+</html>
