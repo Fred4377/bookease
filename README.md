@@ -2,6 +2,9 @@
 
 A simple, fast, and responsive booking platform I built to help local businesses manage their appointments online instead of using WhatsApp and messy notebooks.
 
+## 📸 Preview
+![BookEase Preview](screenshots/preview.png)
+
 ## What it does
 BookEase allows customers to view available services, check real-time availability for specific dates, and book appointments. It also has a basic admin dashboard for the business owner to see their daily schedule and manage bookings.
 
