@@ -3,49 +3,644 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookEase</title>
+    <meta name="description" content="BookEase — A fresh, modern service booking & scheduling platform with instant notifications and WhatsApp confirmation.">
+    <meta name="keywords" content="BookEase, salon booking, reservation, scheduling, React, Node.js, Nairobi salon">
+    <meta name="author" content="Fred Otieno">
+    <title>BookEase — Effortless Salon & Service Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
-        :root { --bg: #0f172a; --text: #f8fafc; --accent: #3b82f6; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; line-height: 1.6; }
-        * { box-sizing: border-box; }
-        
-        /* Alternating Colors */
-        section:nth-of-type(even) { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); box-shadow: inset 0 0 50px rgba(0,0,0,0.3); }
-        section:nth-of-type(odd) { background: var(--bg); }
-        
-        section { padding: 100px 20px; text-align: center; }
-        h1 { font-size: 3.5rem; margin-bottom: 20px; }
-        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
-        p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; color: #94a3b8; }
-        .btn { display: inline-block; padding: 15px 30px; background: var(--accent); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; transition: transform 0.2s; }
-        .btn:hover { transform: translateY(-3px); }
-        
-        .grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
-        .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); width: 300px; }
-        .card h3 { color: var(--accent); }
+        /* ===== Mint Green & Charcoal Design System ===== */
+        :root {
+            --bg-primary: #f8faf9;
+            --bg-secondary: #edf2f0;
+            --bg-card: #ffffff;
+            --accent-mint: #2ecc71;
+            --accent-mint-hover: #27ae60;
+            --accent-charcoal: #2d3e50;
+            --accent-charcoal-hover: #1e2b38;
+            --border-color: #d1dbd6;
+            --text-primary: #2d3e50;
+            --text-secondary: #586961;
+            --text-muted: #83958c;
+            --shadow-sm: 0 2px 8px rgba(45, 62, 80, 0.04);
+            --shadow-md: 0 10px 25px rgba(45, 62, 80, 0.06);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== Header Navbar ===== */
+        .navbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent-charcoal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo i {
+            color: var(--accent-mint);
+        }
+        .logo span {
+            color: var(--accent-mint);
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition);
+        }
+        .github-link:hover {
+            border-color: var(--accent-mint);
+            color: var(--accent-mint);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            padding: 90px 0 60px;
+            text-align: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-mint);
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            color: var(--accent-charcoal);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 36px;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--accent-mint);
+            color: #fff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--accent-mint-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(46, 204, 113, 0.25);
+        }
+
+        /* ===== Booking Demo Area ===== */
+        .booking-demo {
+            padding: 80px 0;
+        }
+        .booking-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .booking-card-header {
+            background: var(--accent-charcoal);
+            color: #fff;
+            padding: 24px;
+            text-align: center;
+        }
+        .booking-card-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .booking-card-header p {
+            font-size: 0.85rem;
+            color: var(--border-color);
+        }
+        .booking-card-body {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-charcoal);
+            margin-bottom: 8px;
+        }
+        .form-select, .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-select:focus, .form-input:focus {
+            border-color: var(--accent-mint);
+            background: #fff;
+        }
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .slot-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-charcoal);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .slot-btn.active {
+            background: var(--accent-mint);
+            border-color: var(--accent-mint);
+            color: #fff;
+        }
+        .slot-btn:hover:not(.active) {
+            background: var(--bg-secondary);
+            border-color: var(--accent-mint);
+        }
+
+        /* ===== Features Section ===== */
+        .features {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-charcoal);
+            margin-bottom: 12px;
+        }
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .feature-card i {
+            font-size: 1.8rem;
+            color: var(--accent-mint);
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-charcoal);
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== Booking Modal Confirmation ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(45, 62, 80, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-box {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--accent-mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .modal-details {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .modal-details div {
+            margin-bottom: 6px;
+        }
+        .modal-details div strong {
+            color: var(--accent-charcoal);
+        }
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: #25d366;
+            color: #fff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            transition: all var(--transition);
+        }
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            padding: 48px 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .footer-logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: var(--accent-charcoal);
+            margin-bottom: 12px;
+        }
+        .footer-logo span {
+            color: var(--accent-mint);
+        }
+        .footer a {
+            color: var(--accent-charcoal);
+            font-weight: 600;
+        }
+        .footer a:hover {
+            color: var(--accent-mint);
+        }
+
+        /* Alternating Color Styles override */
+        section:nth-of-type(even) {
+            background-color: var(--bg-secondary) !important;
+        }
+        section:nth-of-type(odd) {
+            background-color: var(--bg-primary) !important;
+        }
     </style>
 </head>
 <body>
-    <section>
-        <h1>BookEase</h1>
-        <p>Effortless Booking, Anytime, Anywhere</p>
-        <a href="https://github.com/Fred4377/bookease" class="btn">View on GitHub</a>
-    </section>
-    <section>
-        <h2>Features</h2>
-        <div class="grid">
-            <div class="card"><h3>Real-time Availability</h3><p>Experience seamless functionality.</p></div>
-            <div class="card"><h3>Smart Scheduling</h3><p>Experience seamless functionality.</p></div>
-            <div class="card"><h3>Instant Confirmation</h3><p>Experience seamless functionality.</p></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-calendar-check"></i>Book<span>Ease</span>
+            </a>
+            <a href="https://github.com/Fred4377/bookease" target="_blank" rel="noopener noreferrer" class="github-link">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Kenya Barber & Salon Booking</div>
+            <h1>Instant Appointments, Zero Wait Times</h1>
+            <p>
+                A modern booking experience designed for local shops in Nairobi. 
+                Select your service, choose an available time slot, and lock it in via a direct WhatsApp confirmation.
+            </p>
+            <a href="#booking" class="btn-primary">
+                <i class="fa-regular fa-calendar-plus"></i> Book Salon Session
+            </a>
         </div>
     </section>
-    <section>
-        <h2>Tech Stack</h2>
-        <p>Built with React, Node.js, and modern web technologies.</p>
+
+    <!-- ===== BOOKING AREA ===== -->
+    <section class="booking-demo" id="booking">
+        <div class="container">
+            <div class="booking-card">
+                <div class="booking-card-header">
+                    <h2>Elite Cuts & Salon Booking Panel</h2>
+                    <p>Select service & slot to check real-time availability</p>
+                </div>
+                <div class="booking-card-body">
+                    <!-- Service Select -->
+                    <div class="form-group">
+                        <label class="form-label" for="bookingService">Select Grooming Service</label>
+                        <select id="bookingService" class="form-select">
+                            <option value="Dreads Retouch & Styling (KSh 1,500)">Dreads Retouch & Styling — KSh 1,500</option>
+                            <option value="Premium Fade & Beard Trim (KSh 600)" selected>Premium Fade & Beard Trim — KSh 600</option>
+                            <option value="Hair Wash, Treatment & Blow Dry (KSh 1,200)">Hair Wash, Treatment & Blow Dry — KSh 1,200</option>
+                            <option value="Sisterlocks Installation (KSh 8,500)">Sisterlocks Installation — KSh 8,500</option>
+                        </select>
+                    </div>
+
+                    <!-- Date Selection -->
+                    <div class="form-group">
+                        <label class="form-label" for="bookingDate">Select Date</label>
+                        <input type="date" id="bookingDate" class="form-input">
+                    </div>
+
+                    <!-- Time Slots -->
+                    <div class="form-group">
+                        <label class="form-label">Available Time Slots</label>
+                        <div class="slots-grid" id="slotsGrid">
+                            <div class="slot-btn active" data-time="09:00 AM">09:00 AM</div>
+                            <div class="slot-btn" data-time="11:30 AM">11:30 AM</div>
+                            <div class="slot-btn" data-time="02:00 PM">02:00 PM</div>
+                            <div class="slot-btn" data-time="03:30 PM">03:30 PM</div>
+                            <div class="slot-btn" data-time="05:00 PM">05:00 PM</div>
+                            <div class="slot-btn" data-time="06:30 PM">06:30 PM</div>
+                        </div>
+                    </div>
+
+                    <!-- Action btn -->
+                    <button class="btn-primary" id="btnRequestBooking" style="width: 100%; justify-content: center; margin-top: 10px;">
+                        Request Booking Slot
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
-    <section>
-        <p>&copy; 2026 Fred Otieno. Built with ❤️</p>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why BookEase?</h2>
+                <p>Simple tools designed to solve double-booking issues and wait times.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>Real-time Availability</h3>
+                    <p>Updates instantly as slots are taken, guaranteeing you arrive exactly when your barber or stylist is free.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>WhatsApp Sync</h3>
+                    <p>Integrates with direct click-to-chat links, letting you send confirmations directly to Fred's business contact.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Zero Deposit Required</h3>
+                    <p>Simple verification check using your phone contact. Safe, straightforward, and built for local convenience.</p>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <!-- ===== CONFIRMATION MODAL ===== -->
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="modal-title">Booking Draft Created!</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+                Confirm this appointment directly via WhatsApp to lock in your slot.
+            </p>
+
+            <div class="modal-details">
+                <div><strong>Service:</strong> <span id="confService">Fade</span></div>
+                <div><strong>Date:</strong> <span id="confDate">June 15, 2026</span></div>
+                <div><strong>Time:</strong> <span id="confTime">09:00 AM</span></div>
+                <div><strong>Location:</strong> Elite Cuts Salon, Westlands</div>
+            </div>
+
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp" id="btnConfirmWhatsApp">
+                <i class="fa-brands fa-whatsapp"></i> Confirm via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fa-solid fa-calendar-check"></i>Book<span>Ease</span>
+            </div>
+            <p style="margin-bottom: 8px;">Built by <a href="https://github.com/Fred4377" target="_blank" rel="noopener noreferrer">Fred Otieno</a></p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">&copy; 2026 BookEase. Demo reservation platform.</p>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript logic ===== -->
+    <script>
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const dd = String(tomorrow.getDate()).padStart(2, '0');
+        document.getElementById('bookingDate').value = `${yyyy}-${mm}-${dd}`;
+
+        // Slots grid active state toggle
+        const slots = document.querySelectorAll('.slot-btn');
+        let selectedTime = '09:00 AM';
+
+        slots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                slots.forEach(s => s.classList.remove('active'));
+                slot.classList.add('active');
+                selectedTime = slot.getAttribute('data-time');
+            });
+        });
+
+        // Booking confirmation modal trigger
+        const bookingModal = document.getElementById('bookingModal');
+        const closeModal = document.getElementById('closeModal');
+        const btnRequestBooking = document.getElementById('btnRequestBooking');
+        const confService = document.getElementById('confService');
+        const confDate = document.getElementById('confDate');
+        const confTime = document.getElementById('confTime');
+        const btnConfirmWhatsApp = document.getElementById('btnConfirmWhatsApp');
+
+        btnRequestBooking.addEventListener('click', () => {
+            const service = document.getElementById('bookingService').value;
+            const dateStr = document.getElementById('bookingDate').value;
+            
+            if (!dateStr) {
+                alert("Please select a date for your appointment.");
+                return;
+            }
+
+            // Formatting date for display
+            const d = new Date(dateStr);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = d.toLocaleDateString('en-US', options);
+
+            confService.textContent = service;
+            confDate.textContent = formattedDate;
+            confTime.textContent = selectedTime;
+
+            // Generate WhatsApp click-to-chat URL
+            const phone = "254712345678"; // Fred's portfolio placeholder WhatsApp phone
+            const msg = `Hi Fred! I'd like to confirm my booking via BookEase:\n\n💇 Service: ${service}\n📅 Date: ${formattedDate}\n⏰ Time: ${selectedTime}\n\nPlease confirm availability. Thanks!`;
+            btnConfirmWhatsApp.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+
+            bookingModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            bookingModal.classList.remove('active');
+        });
+
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
