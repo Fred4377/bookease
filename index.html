@@ -14,25 +14,25 @@
     <style>
         /* ===== Mint Green & Charcoal Design System ===== */
         :root {
-            --bg-primary: #f8faf9;
-            --bg-secondary: #edf2f0;
-            --bg-card: #ffffff;
-            --accent-mint: #2ecc71;
-            --accent-mint-hover: #27ae60;
-            --accent-charcoal: #2d3e50;
-            --accent-charcoal-hover: #1e2b38;
-            --border-color: #d1dbd6;
-            --text-primary: #2d3e50;
-            --text-secondary: #586961;
-            --text-muted: #83958c;
-            --shadow-sm: 0 2px 8px rgba(45, 62, 80, 0.04);
-            --shadow-md: 0 10px 25px rgba(45, 62, 80, 0.06);
-            --radius-sm: 6px;
-            --radius-md: 10px;
+            --bg-primary: #F0FDF4;
+            --bg-secondary: #E6F5EC;
+            --bg-card: #FFFFFF;
+            --accent-mint: #059669;
+            --accent-mint-hover: #047857;
+            --accent-charcoal: #1F2937;
+            --accent-charcoal-hover: #111827;
+            --border-color: #c2d6cc;
+            --text-primary: #1F2937;
+            --text-secondary: #4b5563;
+            --text-muted: #8fa097;
+            --shadow-sm: 0 2px 8px rgba(31, 41, 55, 0.04);
+            --shadow-md: 0 10px 25px rgba(31, 41, 55, 0.06);
+            --radius-sm: 8px;
+            --radius-md: 12px;
             --radius-lg: 16px;
             --font-display: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         *, *::before, *::after {
@@ -307,15 +307,15 @@
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(45, 62, 80, 0.5);
-            backdrop-filter: blur(5px);
+            background: rgba(31, 41, 55, 0.45);
+            backdrop-filter: blur(6px);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .modal-overlay.active {
             opacity: 1;
@@ -327,14 +327,15 @@
             width: 100%;
             max-width: 450px;
             padding: 30px;
-            box-shadow: var(--shadow-md);
             text-align: center;
             position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            transform: translateY(30px) scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            border: 2px solid #25D366 !important;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1), 0 0 25px rgba(37, 211, 102, 0.45) !important;
         }
         .modal-overlay.active .modal-box {
-            transform: scale(1);
+            transform: translateY(0) scale(1);
         }
         .modal-close {
             position: absolute;
@@ -349,14 +350,15 @@
         .modal-icon {
             width: 60px;
             height: 60px;
-            background: rgba(46, 204, 113, 0.1);
-            color: var(--accent-mint);
+            background: rgba(37, 211, 102, 0.1);
+            color: #25D366 !important;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
             margin: 0 auto 20px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
         }
         .modal-title {
             font-family: var(--font-display);
@@ -367,7 +369,7 @@
         .modal-details {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             padding: 16px;
             margin-bottom: 24px;
             text-align: left;
@@ -386,18 +388,35 @@
             gap: 10px;
             width: 100%;
             padding: 12px;
-            background: #25d366;
+            background: #25D366 !important;
             color: #fff;
             font-family: var(--font-display);
             font-weight: 700;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-md);
             font-size: 0.95rem;
             transition: all var(--transition);
         }
         .btn-whatsapp:hover {
-            background: #20ba5a;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            background: #20ba5a !important;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             transform: translateY(-1px);
+        }
+
+        /* WhatsApp pipeline block stand out styling */
+        .whatsapp-pipeline {
+            border: 2px solid #25D366 !important;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.12), 0 0 15px rgba(37, 211, 102, 0.35) !important;
+        }
+
+        /* Elastic Slot Bounce Animation */
+        @keyframes squishPop {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.94); }
+            60% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-squish {
+            animation: squishPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
         }
 
         /* ===== Footer ===== */
@@ -525,7 +544,7 @@
                     <h3>Real-time Availability</h3>
                     <p>Updates instantly as slots are taken, guaranteeing you arrive exactly when your barber or stylist is free.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card whatsapp-pipeline">
                     <i class="fa-brands fa-whatsapp"></i>
                     <h3>WhatsApp Sync</h3>
                     <p>Integrates with direct click-to-chat links, letting you send confirmations directly to Fred's business contact.</p>
@@ -591,10 +610,20 @@
 
         slots.forEach(slot => {
             slot.addEventListener('click', () => {
-                slots.forEach(s => s.classList.remove('active'));
+                slots.forEach(s => s.classList.remove('active', 'animate-squish'));
                 slot.classList.add('active');
+                slot.offsetHeight; // force reflow
+                slot.classList.add('animate-squish');
                 selectedTime = slot.getAttribute('data-time');
             });
+        });
+
+        // Date select bounce animation
+        const dateInput = document.getElementById('bookingDate');
+        dateInput.addEventListener('change', () => {
+            dateInput.classList.remove('animate-squish');
+            dateInput.offsetHeight; // force reflow
+            dateInput.classList.add('animate-squish');
         });
 
         // Booking confirmation modal trigger
