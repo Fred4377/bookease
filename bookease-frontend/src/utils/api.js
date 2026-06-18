@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://bookease-api-e81m.onrender.com/api';
 
 // Simple wrapper around fetch or Axios. We will implement fetch/axios helper.
 import axios from 'axios';
