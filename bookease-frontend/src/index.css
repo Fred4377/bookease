@@ -13,6 +13,30 @@
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
+  --transition-spring: transform 0.6s linear(0, 0.0121, 0.0478, 0.1057, 0.1834, 0.2774, 0.3837, 0.4975, 0.6139, 0.7274, 0.8327, 0.9251, 1.0006, 1.0565, 1.0917, 1.1076, 1.1058, 1.0888, 1.0601, 1.0232, 0.9823, 0.9419, 0.9066, 0.8804, 0.8654, 0.8617, 0.8691, 0.8859, 0.9103, 0.9404, 0.9734, 1.0063, 1.0366, 1.0621, 1.0812, 1.0924, 1.0959, 1.0927, 1.0827, 1.0681, 1.0506, 1.0319, 1.0138, 0.9976, 0.9845, 0.9752, 0.9706, 0.9705, 0.9749, 0.9827, 0.9926, 1.0033, 1.0135, 1.0223, 1.0289, 1.0326, 1.0337, 1.0317, 1.0271, 1.0205, 1.0129, 1.0051, 0.998, 0.992, 0.9877, 0.9856, 0.9859, 0.9885, 0.9928, 0.9982, 1.0042, 1.0099, 1.0146, 1.0177, 1.0191, 1.0189, 1.0171, 1.0143, 1.0109, 1.0074, 1.0041, 1.0014, 0.9995, 0.9984, 0.9981, 0.9985, 0.9994, 1.0006, 1.0019, 1.0029, 1.0036, 1.0039, 1.0038, 1.0033, 1.0026, 1.0018, 1.001, 1.0003, 0.9998, 0.9995, 0.9994, 0.9995, 0.9997, 1);
+}
+
+/* Bouncy spring animations for cards and buttons globally */
+button, .btn, a.btn, [role="button"], input[type="submit"] {
+  transition: var(--transition-spring), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+}
+
+button:hover, .btn:hover, a.btn:hover, [role="button"]:hover, input[type="submit"]:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+button:active, .btn:active, a.btn:active, [role="button"]:active, input[type="submit"]:active {
+  transform: scale(0.96);
+}
+
+/* Service cards and list cards in BookEase */
+.service-card, .card, [class*="card-"] {
+  transition: var(--transition-spring), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.service-card:hover, .card:hover, [class*="card-"]:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2) !important;
 }
 
 body {
